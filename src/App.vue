@@ -1,16 +1,22 @@
 <template>
   <div id="app">
-    <topHeader></topHeader>
-    <router-view></router-view>
+    <div class="content">
+      <topHeader></topHeader>
+      <router-view></router-view>
+    </div>
+    <pageFooter v-if="this.$route.name !== 'home'"></pageFooter>
   </div>
 </template>
 
 <script>
-  import topHeader from './components/header/Header.vue'
+  import topHeader from './components/Header/Header.vue'
+  import pageFooter from './components/Footer/Footer.vue'
+
   export default {
     name: 'App',
     components: {
-      topHeader
+      topHeader,
+      pageFooter
     }
   }
 </script>
@@ -24,6 +30,10 @@
     -moz-osx-font-smoothing grayscale
     height 100%
     min-width 1280px
+    min-height 880px
+    display flex
+    flex-direction column
+    justify-content space-between
   a
     text-decoration none
     cursor pointer

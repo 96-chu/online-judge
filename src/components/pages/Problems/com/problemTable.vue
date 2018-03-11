@@ -1,6 +1,6 @@
 <template>
   <el-table :data="problemsData" class="problems-table">
-    <el-table-column type="index" label="id">
+    <el-table-column type="index" label="编号">
       <template slot-scope="scope">
         <a>{{scope.row.index}}</a>
       </template>

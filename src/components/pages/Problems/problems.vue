@@ -7,10 +7,13 @@
         </div>
         <div class="filter">
           <el-input v-model="filter" class="filter-input" size="small"></el-input>
-          <el-button size="small"><i class="icon-filter"></i>过滤</el-button>
+          <el-button size="small" class="filter-button">
+            <i class="icon-filter"></i>
+            <span>过滤</span>
+          </el-button>
         </div>
         <div class="pagination">
-          <el-pagination background layout="total, sizes, prev, pager, next, jumper" :total="tableLength"></el-pagination>
+          <el-pagination background :total="tableLength" layout="total, prev, pager, next, jumper"></el-pagination>
         </div>
       </div>
       <div class="content">
@@ -18,11 +21,12 @@
           <problemTable ref="table"></problemTable>
         </div>
         <div class="right-content-wrapper">
-          <Notices ref="notice"></Notices>
+          <Notices ref="note"></Notices>
+          <Labels ref="labs"></Labels>
         </div>
       </div>
       <div class="pagination">
-        <el-pagination background layout="total, sizes, prev, pager, next, jumper" :total="tableLength"></el-pagination>
+        <el-pagination background :total="tableLength" layout="total, prev, pager, next, jumper"></el-pagination>
       </div>
     </div>
   </div>
@@ -30,12 +34,11 @@
 
 <script>
     import problemTable from './com/problemTable.vue'
-
     export default {
       data () {
         return {
           filter: null,
-          tableLength: null
+          tableLength: 1
         }
       },
       components: {
@@ -46,11 +49,12 @@
       },
       methods: {
         initData () {
-          this.$ajax.get('/static/data.json').then(
+          this.$ajax.get('/static/problemData.json').then(
             (response) => {
-              this.$refs.table.problemsData = response.data.table
-              this.$refs.notice.noticeData = response.data.notice
-              this.tableLength = response.data.table.length
+              this.$refs.table.problemsData = response.data.data.table
+              this.$refs.note.noticeData = response.data.data.note
+              this.$refs.labs.labelData = response.data.data.labs
+              this.tableLength = response.data.data.table.length
             }
           )
         }
@@ -62,7 +66,7 @@
   .problems-content-wrapper
     display flex
     justify-content center
-    margin-top 40px
+    padding-top 40px
     .problems-content
       width 1200px
       display flex
@@ -83,8 +87,10 @@
           .filter-input
             width 200px
             margin-right 10px
-          i
-            margin-right 4px
+          .filter-button
+            i
+              /*margin-right 4px*/
+              font-weight bold
         .pagination
           display flex
           justify-content center
@@ -100,6 +106,10 @@
         .right-content-wrapper
           width 30%
           margin-left 20px
+          display flex
+          flex-direction column
+          div:not(:first-child)
+            margin-top 20px
       .pagination
         display flex
         justify-content center

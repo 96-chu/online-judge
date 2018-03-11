@@ -33,7 +33,7 @@
               index: 1,
               title: '比赛',
               isSelected: null,
-              path: '/home'
+              path: '/contests'
             },
             {
               index: 2,

@@ -9,10 +9,12 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 //引入自定义组件
 import Notices from './components/pageCom/Notice'
+import Labels from './components/pageCom/Label'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(Notices)
+Vue.use(Labels)
 Vue.prototype.$ajax = axios
 
 /* eslint-disable no-new */

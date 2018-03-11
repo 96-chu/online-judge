@@ -1,6 +1,7 @@
 <template>
   <div class="notice-wrapper">
     <div class="title">
+      <i class="icon-notice"></i>
       <span>公告</span>
     </div>
     <div class="notice-list">
@@ -19,6 +20,7 @@
         noticeData: []
       }
     },
+    props: ['title']
   }
 </script>
 
@@ -34,6 +36,10 @@
     align-items center
     padding 0px 20px
     border-bottom solid 1px #85c5e5
+    cursor default
+    & > i
+      margin-right 6px
+      font-weight bold
   .notice-list
     padding 10px 20px 20px 20px
     font-size 14px
