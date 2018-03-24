@@ -25,7 +25,7 @@
 
 <style scoped lang="stylus">
   .notice-wrapper
-    width 100%
+    width 300px
     border solid 1px #85c5e5
     .title
       background #d9edf7

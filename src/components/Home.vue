@@ -6,8 +6,8 @@
 </template>
 
 <script>
-  import carousel from './pageCom/carousel.vue'
-  import loginItem from './pages/homePage.vue'
+  import carousel from './globalCom/carousel.vue'
+  import loginItem from './globalCom/userBehavior/logOrReg/logOrReg.vue'
 
   export default {
     components: {

@@ -13,7 +13,7 @@
           </el-button>
         </div>
         <div class="pagination">
-          <el-pagination background :total="tableLength" layout="total, prev, pager, next, jumper"></el-pagination>
+          <el-pagination background :total="tableLength" layout="total, prev, pager, next, jumper" class="clearfix"></el-pagination>
         </div>
       </div>
       <div class="content">
@@ -49,7 +49,7 @@
       },
       methods: {
         initData () {
-          this.$ajax.get('/static/problemData.json').then(
+          this.$ajax.get('/static/response/problemData.json').then(
             (response) => {
               this.$refs.table.problemsData = response.data.data.table
               this.$refs.note.noticeData = response.data.data.note
@@ -64,9 +64,10 @@
 
 <style scoped lang="stylus">
   .problems-content-wrapper
-    display flex
-    justify-content center
-    padding-top 40px
+    display block
+    margin-top 40px
+    /*min-height 600px*/
+    /*min-height 800px*/
     .problems-content
       width 1200px
       display flex
@@ -96,16 +97,16 @@
           justify-content center
       .content
         display flex
+        justify-content space-between
         .left-content-wrapper
           width 70%
+          display table
           .problems-table
             width 100%
             a
               color #409EFF
               font-weight bold
         .right-content-wrapper
-          width 30%
-          margin-left 20px
           display flex
           flex-direction column
           div:not(:first-child)

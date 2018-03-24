@@ -1,18 +1,13 @@
 <template>
-  <div class="header-content-wrapper" :class="this.$route.path === '/home'? 'home': 'other'">
+  <div class="header-content-wrapper" :class="isHomePage">
     <div class="header-content">
       <div class="menu-wrapper">
         <router-link to="home">Online Judge</router-link>
         <div class="menu">
           <div v-for="item in menu" class="menu-item" :class="item.isSelected">
-            <span @click="changeMenu(item.path)">{{item.title}}</span>
+            <a @click="changeMenu(item.path)">{{item.title}}</a>
           </div>
         </div>
-      </div>
-      <div class="login-wrapper">
-        <a>登录</a>
-        <span>/</span>
-        <a>注册</a>
       </div>
     </div>
   </div>
@@ -48,6 +43,15 @@
               path: ''
             }
           ]
+        }
+      },
+      computed: {
+        isHomePage () {
+          if (this.$route.name === 'Home' || this.$route.name === 'Register') {
+            return 'home'
+          }  else {
+            return 'other'
+          }
         }
       },
       methods: {
@@ -101,8 +105,6 @@
           color black
         .menu
           display flex
-      .login-wrapper
-        margin-right 40px
     &.home
       position absolute
       background rgba(255,255,255,.2)
@@ -126,10 +128,13 @@
       background #545C64
       color #fff
       height 40px
+      min-height 40px
       font-size 14px
-      .menu-wrapper a
-        color #fff
+      .menu-wrapper > a
+        color #ccc
         font-size 20px
+        &:hover
+          color #fff
       .login-wrapper a
         color #fff
       .menu
@@ -142,13 +147,17 @@
           align-items center
           transition all ease-in-out .2s
           border-bottom solid 2px #545C64
-          span
+          a
             margin-top 4px
+            color #ccc
+            transition color ease-in-out .2s
           &:hover
             background #434A50
+            a
+              color #fff
           &.active
             border-bottom solid 2px #FFD04B
-            span
+            a
               color #FFD04B
 
 </style>

@@ -5,22 +5,26 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import axios from 'axios'
+import codeMirror from 'vue-codemirror-lite'
 import 'element-ui/lib/theme-chalk/index.css'
 
 //引入自定义组件
-import Notices from './components/pageCom/Notice'
-import Labels from './components/pageCom/Label'
+import Notices from './components/globalCom/Notice'
+import Labels from './components/globalCom/Label'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.use(Notices)
 Vue.use(Labels)
+Vue.use(codeMirror)
 Vue.prototype.$ajax = axios
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  components: {
+    App
+  },
   template: '<App/>'
 })

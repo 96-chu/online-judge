@@ -1,10 +1,8 @@
 <template>
   <div id="app">
-    <div class="content">
-      <topHeader></topHeader>
-      <router-view></router-view>
-    </div>
-    <pageFooter v-if="this.$route.name !== 'home'"></pageFooter>
+    <topHeader></topHeader>
+    <router-view></router-view>
+    <pageFooter v-if="route"></pageFooter>
   </div>
 </template>
 
@@ -17,6 +15,15 @@
     components: {
       topHeader,
       pageFooter
+    },
+    computed: {
+      route () {
+        if (this.$route.name === 'Home' || this.$route.name === 'Register') {
+          return false
+        } else {
+          return true
+        }
+      }
     }
   }
 </script>
@@ -24,18 +31,16 @@
 <style lang="stylus">
   html,body
     margin 0
+    padding 0
     height 100%
   #app
     -webkit-font-smoothing antialiased
     -moz-osx-font-smoothing grayscale
     height 100%
     min-width 1280px
-    min-height 880px
     display flex
     flex-direction column
-    justify-content space-between
-  a
-    text-decoration none
-    cursor pointer
+    align-items center
     color #000
+    min-height 1000px
 </style>

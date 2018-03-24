@@ -1,13 +1,13 @@
 <template>
-  <el-table :data="problemsData" class="problems-table">
+  <el-table :data="problemsData" class="problems-table clearfix">
     <el-table-column type="index" label="编号">
       <template slot-scope="scope">
-        <a>{{scope.row.index}}</a>
+        <a @click="toProblemDetail(scope.row.index)">{{scope.row.index}}</a>
       </template>
     </el-table-column>
-    <el-table-column label="题目">
+    <el-table-column label="题目" width="500px">
       <template slot-scope="scope">
-        <a>{{scope.row.name}}</a>
+        <a @click="toProblemDetail(scope.row.index)">{{scope.row.name}}</a>
       </template>
     </el-table-column>
     <el-table-column prop="hard" label="难度"></el-table-column>
@@ -32,10 +32,14 @@
       created () {
       },
       methods: {
+        toProblemDetail (id) {
+          this.$router.push({name: 'ProblemDetail', params: {problemId: id}})
+        }
       }
     }
 </script>
 
 <style scoped lang="stylus">
-
+a:hover
+  text-decoration underline
 </style>

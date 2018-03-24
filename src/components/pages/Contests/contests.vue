@@ -49,7 +49,7 @@
     },
     methods: {
       initData () {
-        this.$ajax.get('/static/contestData.json').then(
+        this.$ajax.get('/static/response/contestData.json').then(
           (response) => {
             this.$refs.table.contestsData = response.data.data.table
             this.$refs.note.noticeData = response.data.data.note

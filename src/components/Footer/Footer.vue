@@ -12,10 +12,13 @@
 
 <style scoped lang="stylus">
   .footer-wrapper
-    height 40px
     display flex
     justify-content center
-    align-items center
-    padding 30px 0 30px 0
+    align-items flex-end
     font-size 12px
+    flex 1
+    padding-top 144px
+    min-height 24px
+    span
+      margin-bottom 10px
 </style>
