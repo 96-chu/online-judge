@@ -33,7 +33,36 @@
       </div>
     </div>
     <div class="right-panel">
+      <form class="languageSelect">
+        <h4>语言选择</h4>
+        <div class="selectContent">
+          <span v-for="item in language">
+            <input type="radio" :value="item.index">{{item.name}} {{item.standard}}
+          </span>
+        </div>
+      </form>
       <codemirror :value="code" class="editor"></codemirror>
+      <el-button class="submite-code" size="small" @click="alertWarning">提交代码</el-button>
+    </div>
+    <div class="bottom-panel" v-if="runtime" :style="statusBg">
+      <div class="runtime-title">
+        <h3>运行结果: <span :style="status">{{runtime.status}}</span></h3>
+        <el-button size="small" class="check-confirm" @click="toConfirmRecord">查看提交记录</el-button>
+      </div>
+      <div class="success-info" v-if="runtime.status === 'Accepted'">
+        <p>
+          <span>运行时间：{{runtime.runtime}}ms</span>
+          <span>语言：{{runtime.language}}</span>
+        </p>
+        <p>提交时间：{{runtime.date}}</p>
+      </div>
+      <div class="warning-info" v-else>
+        <div v-html="runtime.errorInfo" class="error-detail"></div>
+        <p>
+          <span>语言：{{runtime.language}}</span>
+          <span>提交时间：{{runtime.date}}</span>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -43,11 +72,45 @@
     data () {
       return {
         code: '',
-        problem: {}
+        problem: {},
+        language: [
+          {
+            index: 1,
+            name: 'c',
+            standard: '( GCC 4.8 )'
+          },
+          {
+            index: 2,
+            name: 'c++',
+            standard: '( G++ 4.3 )'
+          },
+          {
+            index: 3,
+            name: 'Java',
+            standard: '( Oracle JDK 1.7 )'
+          }
+        ],
+        runtime: null,
       }
     },
     created () {
       this.getDetail()
+    },
+    computed: {
+      status () {
+        if (this.runtime.status === 'Accepted') {
+          return {color: 'green'}
+        } else {
+          return {color: 'red'}
+        }
+      },
+      statusBg () {
+        if (this.runtime.status === 'Accepted') {
+          return {background: '#f0f9eb'}
+        } else {
+          return {background: '#fef0f0'}
+        }
+      }
     },
     methods: {
       getDetail () {
@@ -56,6 +119,34 @@
             this.problem = response.data.data
           }
         )
+      },
+      confirmCode () {
+        this.$ajax.get('/static/response/runtimeSuccess.json').then(
+          (response) => {
+            this.runtime = response.data.data
+          }
+        )
+      },
+      toConfirmRecord () {
+        this.$router.push({name: 'Submissions'})
+      },
+      alertWarning () {
+        this.$confirm('你的代码也许包含错误，确定提交？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$notify({
+            title: '提示',
+            message: '提交成功！'
+          });
+          this.confirmCode()
+        }).catch(() => {
+          this.$notify({
+            title: '提示',
+            message: '取消提交！',
+          });
+        });
       }
     }
   }
@@ -69,11 +160,12 @@
     margin-top 80px
     border solid 1px #eee
     font-size 'STHeitiSC-Light'
+    flex-wrap wrap
     /*padding-bottom 10px*/
     .left-panel
       flex  0 0 40%
       padding 0 10px 20px 10px
-      height 600px
+      height 650px
       overflow auto
       .problem-detail-content
         background #ebebeb
@@ -110,5 +202,49 @@
           border-left solid 2px #FFD04B
     .right-panel
       flex 1
-
+      padding 0 10px
+      display flex
+      flex-direction column
+      border-left solid 1px #eee
+      overflow auto
+      .languageSelect
+        margin-bottom 30px
+        .selectContent
+          border-left solid 2px #FFD04B
+          padding 10px
+          span:not(:first-child)
+            margin-left 20px
+          span
+            input
+              margin-right 10px
+      .editor
+        border solid 1px #eee
+        margin-bottom 15px
+      .submite-code
+        width 100px
+        align-self flex-end
+    .bottom-panel
+      width 1200px
+      border-top solid 1px #eee
+      padding 10px
+      display flex
+      flex-direction column
+      h3
+        font-weight normal
+      p
+        font-size 14px
+        margin 10px 10px 10px 0
+        color #242424
+        span:first-child
+          margin-right 10px
+      .runtime-title
+        display flex
+        justify-content space-between
+      .warning-info
+        .error-detail
+          padding 10px
+          border solid 1px #ccc
+          margin 10px 0
+      .check-confirm
+        height 30px
 </style>

@@ -1,0 +1,13 @@
+{
+  "code": 200,
+  "data": {
+    "problem": {
+      "index": 1,
+      "date": "2016-05-03",
+      "name": "A+B 问题",
+      "time_limit": 8,
+      "space_limit": 98304
+    },
+    "submissions": []
+  }
+}

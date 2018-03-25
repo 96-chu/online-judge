@@ -62,5 +62,13 @@ export default new Router({
       component: Contests,
       name: 'Contests'
     }
-  ]
+  ],
+  // 每次router到新的页面就会滚到顶部
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
 })

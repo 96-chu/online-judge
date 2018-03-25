@@ -1,0 +1,9 @@
+{
+  "code": 200,
+  "data": {
+    "status": "Compile Error",
+    "language": "c++",
+    "date": "2016-05-03",
+    "errorInfo": "/var/judger/run/92fcf1b950f45a684018ac4bb96f643e/main.cpp:2:1: error: &#39;cin&#39; does not name a type <br>cin&gt;&gt;a&gt;&gt;b;<br>^<br>/var/judger/run/92fcf1b950f45a684018ac4bb96f643e/main.cpp:3:1: error: &#39;cout&#39; does not name a type<br>cout&lt;&lt;a+b<br>^"
+  }
+}
