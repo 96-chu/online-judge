@@ -36,8 +36,10 @@
       <form class="languageSelect">
         <h4>语言选择</h4>
         <div class="selectContent">
-          <span v-for="item in language">
-            <input type="radio" :value="item.index">{{item.name}} {{item.standard}}
+          <span v-for="item in language" class="language-item">
+            <!--input type=radio 需要绑定一个v-model来绑定值-->
+            <input type="radio" :id="'langRadio' + item.index" :value="item.index" v-model="chosenLanguage">
+            <label :for="'langRadio' + item.index">{{item.name}} {{item.standard}}</label>
           </span>
         </div>
       </form>
@@ -90,6 +92,8 @@
             standard: '( Oracle JDK 1.7 )'
           }
         ],
+        // 选中的语言
+        chosenLanguage: '',
         runtime: null,
       }
     },
@@ -215,8 +219,13 @@
           span:not(:first-child)
             margin-left 20px
           span
+            cursor pointer
             input
-              margin-right 10px
+              cursor pointer
+            label
+              padding-left 10px
+              cursor pointer
+
       .editor
         border solid 1px #eee
         margin-bottom 15px
