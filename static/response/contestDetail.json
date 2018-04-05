@@ -1,0 +1,15 @@
+{
+  "code": 200,
+  "data": {
+    "index": 1,
+    "name": "ACM寒假训练题",
+    "start_time": "2018年2月21日 19:00",
+    "end_time": "2018年2月28日 00:00",
+    "status": "end",
+    "type": "公开赛",
+    "creator": "xcs",
+    "list": [
+      {}
+    ]
+  }
+}

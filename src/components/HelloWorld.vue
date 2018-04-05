@@ -90,6 +90,14 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  methods: {
+    getData () {
+      this.$ajax.get('/static/response/contestData.json').then(
+        (response) => {
+        }
+      )
+    }
   }
 }
 </script>

@@ -2,12 +2,18 @@
   <div class="header-content-wrapper" :class="isHomePage">
     <div class="header-content">
       <div class="menu-wrapper">
-        <router-link to="home">Online Judge</router-link>
-        <div class="menu">
+        <router-link :to="{ name: 'Home'}">
+          Online Judge
+          <span v-if="$store.state.roles === 'tch'" class="teacher-role">教务平台</span>
+        </router-link>
+        <div class="menu" v-if="$store.state.roles !== 'tch'">
           <div v-for="item in menu" class="menu-item" :class="item.isSelected">
             <a @click="changeMenu(item.path)">{{item.title}}</a>
           </div>
         </div>
+      </div>
+      <div class="userInfo">
+        <a @click="clearSession" v-if="$store.state.username">退出登录</a>
       </div>
     </div>
   </div>
@@ -70,6 +76,11 @@
         },
         routerChange () {
           this.changeMenuStyle(this.$route.path)
+        },
+        clearSession () {
+          sessionStorage.clear()
+          this.$store.commit('refreshUserInfo')
+          console.log(sessionStorage.username)
         }
       },
       watch: {
@@ -103,6 +114,9 @@
         & > a
           font-size 24px
           color black
+          .teacher-role
+            font-size 12px
+            color #fff
         .menu
           display flex
     &.home

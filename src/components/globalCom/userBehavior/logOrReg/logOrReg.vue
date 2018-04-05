@@ -1,5 +1,5 @@
 <template>
-  <div class="login-content-wrapper">
+  <div class="login-content-wrapper" v-if="!$store.state.username">
     <div class="login-content">
       <div class="login-body">
         <registerItem v-if="$route.name === 'Register'"></registerItem>
@@ -22,7 +22,7 @@
         isLogin: true
       }
     },
-    methods: {
+    computed: {
     }
   }
 </script>
@@ -42,8 +42,6 @@
       margin-top 100px
       & > div
         padding 40px 20px 20px 20px
-        width 280px
-        height 240px
         background-color #fff
         border-radius 6px
         box-shadow 2px 5px 25px rgba(0, 0, 0, 0.5)

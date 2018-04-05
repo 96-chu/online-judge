@@ -42,5 +42,5 @@
     flex-direction column
     align-items center
     color #000
-    min-height 1000px
+    /*min-height 1000px*/
 </style>

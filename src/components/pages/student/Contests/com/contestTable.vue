@@ -2,12 +2,12 @@
   <el-table :data="contestsData" class="contests-table" :cell-style="test">
     <el-table-column type="index" label="编号">
       <template slot-scope="scope">
-        <a>{{scope.row.index}}</a>
+        <a @click="toDetail(scope.row.index)">{{scope.row.index}}</a>
       </template>
     </el-table-column>
     <el-table-column label="比赛名称">
       <template slot-scope="scope">
-        <a>{{scope.row.name}}</a>
+        <a @click="toDetail(scope.row.index)">{{scope.row.name}}</a>
       </template>
     </el-table-column>
     <el-table-column prop="date" label="开始时间"></el-table-column>
@@ -51,6 +51,9 @@
             }
           }
         }
+      },
+      toDetail (id) {
+        this.$router.push({name: 'ContestDetail', params: {contestId: id}})
       }
     }
   }

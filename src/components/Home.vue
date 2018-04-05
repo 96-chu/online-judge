@@ -13,12 +13,16 @@
     components: {
       carousel,
       loginItem
+    },
+    created () {
+      console.log(this.$store.state.username)
     }
   }
 </script>
 
 <style scoped lang="stylus">
   .home-content-wrapper
-    height 100%
+    display block
     width 100%
+    height 100%
 </style>

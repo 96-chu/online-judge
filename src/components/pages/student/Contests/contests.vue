@@ -63,8 +63,7 @@
 
 <style scoped lang="stylus">
   .contests-content-wrapper
-    display flex
-    justify-content center
+    display block
     margin-top 40px
     .contests-content
       width 1200px
