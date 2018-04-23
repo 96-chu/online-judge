@@ -1,10 +1,13 @@
 <template>
-  <div class="header-content-wrapper" :class="isHomePage">
+  <nav class="header-content-wrapper" :class="isHomePage">
     <div class="header-content">
       <div class="menu-wrapper">
-        <router-link :to="{ name: 'Home'}">
+        <router-link :to="{ name: 'TchIndex'}" v-if="$store.state.roles === 'tch'">
           Online Judge
-          <span v-if="$store.state.roles === 'tch'" class="teacher-role">教务平台</span>
+          <span class="teacher-role">教务平台</span>
+        </router-link>
+        <router-link :to="{ name: 'Home'}" v-else>
+          Online Judge
         </router-link>
         <div class="menu" v-if="$store.state.roles !== 'tch'">
           <div v-for="item in menu" class="menu-item" :class="item.isSelected">
@@ -16,7 +19,7 @@
         <a @click="clearSession" v-if="$store.state.username">退出登录</a>
       </div>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -56,7 +59,11 @@
           if (this.$route.name === 'Home' || this.$route.name === 'Register') {
             return 'home'
           }  else {
-            return 'other'
+            if (this.$store.state.roles === 'tch') {
+              return 'other teacher'
+            } else {
+              return 'other'
+            }
           }
         }
       },
@@ -81,6 +88,7 @@
           sessionStorage.clear()
           this.$store.commit('refreshUserInfo')
           console.log(sessionStorage.username)
+          this.$router.push({name: 'Home'})
         }
       },
       watch: {
@@ -95,13 +103,14 @@
 <style scoped lang="stylus">
   .header-content-wrapper
     height 60px
-    min-width 1280px
+    min-width 1200px
     width 100%
     display flex
     justify-content center
     align-items center
     .header-content
-      min-width 1280px
+      min-width 1200px
+      max-width 1200px
       display flex
       justify-content space-between
       align-items center
@@ -109,14 +118,10 @@
       .menu-wrapper
         display flex
         align-items center
-        margin-left 40px
         cursor pointer
         & > a
           font-size 24px
           color black
-          .teacher-role
-            font-size 12px
-            color #fff
         .menu
           display flex
     &.home
@@ -173,5 +178,17 @@
             border-bottom solid 2px #FFD04B
             a
               color #FFD04B
-
+      &.teacher
+        background #4a667b
+        .menu-wrapper > a
+          color #d5e5ed
+          font-weight normal
+          font-size 20px
+          &:hover
+            color #fff
+            .teacher-role
+              color #fff
+        .teacher-role
+          color #d5e5ed
+          font-size 12px
 </style>

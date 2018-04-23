@@ -1,0 +1,63 @@
+{
+  "code": 200,
+  "data": {
+    "semester": "春季学期",
+    "course": [
+      {
+        "id": "00860012",
+        "name": "数据结构",
+        "stu_total": 100,
+        "stu_level": "本科生"
+      },
+      {
+        "id": "00860013",
+        "name": "计算机组成原理计算机组成原理计算机组成原理",
+        "stu_total": 100,
+        "stu_level": "本科生"
+      },
+      {
+        "id": "00860014",
+        "name": "系统结构",
+        "stu_total": 100,
+        "stu_level": "本科生"
+      }
+    ],
+    "contest": [
+      {
+        "id": "1",
+        "name": "ACM春季选拔赛",
+        "group_total": 3,
+        "time_start": "2018-04-09",
+        "time_end": "2018-04-13"
+      },
+      {
+        "id": "2",
+        "name": "ACM春季小组赛",
+        "group_total": 5,
+        "time_start": "2018-04-09",
+        "time_end": "2018-04-13"
+      },
+      {
+        "id": "3",
+        "name": "ACM春季选拔赛_1",
+        "group_total": 3,
+        "time_start": "2018-04-09",
+        "time_end": "2018-04-13"
+      },
+      {
+        "id": "4",
+        "name": "ACM春季小组赛_1",
+        "group_total": 3,
+        "time_start": "2018-04-09",
+        "time_end": "2018-04-13"
+      },
+      {
+        "id": "3",
+        "name": "ACM春季选拔赛_2",
+        "group_total": 3,
+        "time_start": "2018-04-09",
+        "time_end": "2018-04-13"
+      }
+    ]
+  }
+}

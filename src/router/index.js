@@ -4,12 +4,12 @@ import Home from '@/components/Home'
 
 //  学生权限页面
 // import Problem from '@/components/pages/student/Problems/problems.vue'
-// import ProblemDetail from '@/components/pages/student/Problems/com/problemDetail.vue'
-// import Submissions from '@/components/pages/student/Problems/com/submissions.vue'
-// import ProblemIndex from '@/components/pages/student/Problems/com/problemIndex.vue'
+// import ProblemDetail from '@/components/pages/student/Problems/cubeItem/problemDetail.vue'
+// import Submissions from '@/components/pages/student/Problems/cubeItem/submissions.vue'
+// import ProblemIndex from '@/components/pages/student/Problems/cubeItem/problemIndex.vue'
 // import Contests from '@/components/pages/student/Contests/contests.vue'
 // import ContestDetail from '@/components/pages/student/Contests/ContestDetail/contestDetail.vue'
-// import ContestIndex from '@/components/pages/student/Contests/ContestDetail/com/contestIndex.vue'
+// import ContestIndex from '@/components/pages/student/Contests/ContestDetail/cubeItem/contestIndex.vue'
 //  懒加载
 const Problem = (resolve) => {
   import('@/components/pages/student/Problems/problems.vue').then((module) => {
@@ -53,6 +53,39 @@ const TchIndex = (resolve) => {
     resolve(module)
   })
 }
+const CourseDetail = (resolve) => {
+  import('@/components/pages/teacher/courseDetail/courseDetail.vue').then((module) => {
+    resolve(module)
+  })
+}
+const StuInfo = (resolve) => {
+  import('@/components/pages/teacher/courseDetail/com/stuInfo/studentInfoTable.vue').then((module) => {
+    resolve(module)
+  })
+}
+const ScoreManage = (resolve) => {
+  import('@/components/pages/teacher/courseDetail/com/scoreManage/scoreList.vue').then((module) => {
+    resolve(module)
+  })
+}
+const WorkManage = (resolve) => {
+  import('@/components/pages/teacher/courseDetail/com/workManage/workManage.vue').then((module) => {
+    resolve(module)
+  })
+}
+
+const TchContestDetail = (resolve) => {
+  import('@/components/pages/teacher/contestDetail/contestDetail.vue').then((module) => {
+    resolve(module)
+  })
+}
+
+const AddProblem = (resolve) => {
+  import('@/components/pages/teacher/addProblem/addProblem.vue').then((module) => {
+    resolve(module)
+  })
+}
+
 
 
 Vue.use(Router)
@@ -116,9 +149,45 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/tch/index',
+    path: '/index',
     component: TchIndex,
     name: 'TchIndex',
+    meta: { requiresAuth: true } //页面需要的权限
+  },
+  {
+    path: '/courseDetail',
+    component: CourseDetail,
+    name: 'CourseDetail',
+    redirect: '/courseDetail/stuInfo',
+    meta: { requiresAuth: true }, //页面需要的权限
+    children: [
+      {
+        path: 'stuInfo',
+        component: StuInfo,
+        name: 'stuInfo'
+      },
+      {
+        path: 'scoreManage',
+        component: ScoreManage,
+        name: 'scoreManage'
+      },
+      {
+        path: 'workManage',
+        component: WorkManage,
+        name: 'workManage'
+      }
+    ]
+  },
+  {
+    path: '/contestDetail',
+    component: TchContestDetail,
+    name: 'TchContestDetail',
+    meta: { requiresAuth: true } //页面需要的权限
+  },
+  {
+    path: '/add-problem',
+    component: AddProblem,
+    name: 'AddProblem',
     meta: { requiresAuth: true } //页面需要的权限
   }
 ]

@@ -3,9 +3,9 @@ a {
   cursor: pointer;
 }
 
-span,div {
-  cursor: default;
-}
+/*span,div {*/
+  /*cursor: default;*/
+/*}*/
 
 .clearfix:after {
   content:"";
@@ -15,4 +15,19 @@ span,div {
 
 .CodeMirror {
   height: 470px!important;
+}
+
+
+.el-tabs__item:focus.is-active.is-focus:not(:active)  {
+  outline: none;
+  box-shadow: none!important;
+}
+.el-rate{
+  height: 40px!important;
+}
+.el-rate__icon {
+  font-size: 40px!important;
+}
+.el-icon-star-on {
+  color: #6084a0!important;
 }

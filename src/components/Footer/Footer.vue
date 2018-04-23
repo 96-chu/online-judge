@@ -1,7 +1,7 @@
 <template>
-    <div class="footer-wrapper">
+    <footer class="footer-wrapper">
       <span>copyright &copy; 2018 上海大学计算机学院</span>
-    </div>
+    </footer>
 </template>
 
 <script>
