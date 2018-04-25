@@ -86,6 +86,17 @@ const AddProblem = (resolve) => {
   })
 }
 
+const AddContest = (resolve) => {
+  import('@/components/pages/teacher/addContest/addContest.vue').then((module) => {
+    resolve(module)
+  })
+}
+
+const ContestAuto = (resolve) => {
+  import('@/components/pages/teacher/autocomplete/autocomplete.vue').then((module) => {
+    resolve(module)
+  })
+}
 
 
 Vue.use(Router)
@@ -188,6 +199,18 @@ export const constantRouterMap = [
     path: '/add-problem',
     component: AddProblem,
     name: 'AddProblem',
+    meta: { requiresAuth: true } //页面需要的权限
+  },
+  {
+    path: '/add-contest',
+    component: AddContest,
+    name: 'AddContest',
+    meta: { requiresAuth: true } //页面需要的权限
+  },
+  {
+    path: '/contest-autocomplete',
+    component: ContestAuto,
+    name: 'ContestAuto',
     meta: { requiresAuth: true } //页面需要的权限
   }
 ]

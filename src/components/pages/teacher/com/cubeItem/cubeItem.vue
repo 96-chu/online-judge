@@ -13,8 +13,8 @@
         <p v-show="type === 'contest'">结束时间：{{item.time_end}}</p>
       </div>
     </div>
-    <div class="cube-content cube-add" v-show="type === 'contest'">
-      <a class="el-icon-circle-plus-outline"></a>
+    <div class="cube-content cube-add" v-show="type === 'contest'" @click="$router.push({name: 'AddContest'})">
+      <i class="el-icon-circle-plus-outline"></i>
     </div>
   </div>
 </template>

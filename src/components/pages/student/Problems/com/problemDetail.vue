@@ -1,12 +1,21 @@
 <template>
   <div class="problem-detail-wrapper">
-    <div class="problem-detail-content">
+    <div class="problem-detail-content" v-if="$store.state.roles !== 'tch'">
       <div class="content-title">
         <div v-for="item in contentTitle" :class="{active: item.name === $route.name}" @click="changeOption(item.name)">{{item.title}}</div>
       </div>
       <router-view></router-view>
     </div>
-  </div>
+    <div class="problem-detail-content tch" v-else>
+      <div class="content-title">
+        <h3 class="problem-title">
+          <router-link class="el-icon-arrow-left" :to="{name: 'AddContest'}"></router-link>
+          题目信息
+        </h3>
+      </div>
+      <router-view></router-view>
+    </div>
+    </div>
 </template>
 
 <script>
@@ -28,6 +37,7 @@
       }
     },
     created () {
+      console.log(this.$store.state.roles)
     },
     methods: {
       changeOption (name) {
@@ -62,4 +72,15 @@
           &.active
             border-bottom solid #ffd04b 2px
             color #000
+    .tch
+      h3.problem-title
+        font-size 30px
+        line-height 45px
+        font-weight normal
+        margin 0
+        a
+          margin-right 6px
+          color #888
+          &:hover
+            color #4a667b
 </style>

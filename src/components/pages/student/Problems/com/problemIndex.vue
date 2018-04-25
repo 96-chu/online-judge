@@ -1,6 +1,6 @@
 <template>
   <div class="problem-index-wrapper">
-    <div class="left-panel">
+    <div class="left-panel" :class="$store.state.roles">
       <div class="problem-detail-content">
         <h3 class="problem-title">{{problem.name}}</h3>
         <p>
@@ -9,7 +9,7 @@
           <span>空间限制：{{problem.space_limit}}K</span>
         </p>
       </div>
-      <div class="problem-index-content">
+      <div class="problem-index-content" v-if="$store.state.roles !== 'tch'">
         <div class="problem-description">
           <h4>题目描述</h4>
           <p>{{problem.description}}</p>
@@ -31,8 +31,30 @@
           <p>{{problem.output_example}}</p>
         </div>
       </div>
+      <div class="problem-index-content" v-else>
+        <div class="problem-description">
+          <h4>题目描述</h4>
+          <p>{{problem.description}}</p>
+        </div>
+        <div class="problem-input-example">
+          <h4>输入示例</h4>
+          <p>{{problem.input_example}}</p>
+        </div>
+        <div class="problem-input-description">
+          <h4>输入描述</h4>
+          <p>{{problem.input_description}}</p>
+        </div>
+        <div class="problem-output-example">
+          <h4>输出示例</h4>
+          <p>{{problem.output_example}}</p>
+        </div>
+        <div class="problem-output-description">
+          <h4>输出描述</h4>
+          <p>{{problem.output_description}}</p>
+        </div>
+      </div>
     </div>
-    <div class="right-panel">
+    <div class="right-panel" v-if="$store.state.roles !== 'tch'">
       <form class="languageSelect">
         <h4>语言选择</h4>
         <div class="selectContent">
@@ -204,6 +226,16 @@
         .problem-output-example p
           border solid 1px #eee
           border-left solid 2px #FFD04B
+      &.tch
+        flex 1
+        height auto
+        .problem-index-content
+          display flex
+          flex-wrap wrap
+          justify-content space-between
+          & > div
+            flex 0 0 40%
+            margin 0
     .right-panel
       flex 1
       padding 0 10px

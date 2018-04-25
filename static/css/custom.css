@@ -3,6 +3,7 @@ a {
   cursor: pointer;
 }
 
+
 /*span,div {*/
   /*cursor: default;*/
 /*}*/
@@ -26,8 +27,8 @@ a {
   height: 40px!important;
 }
 .el-rate__icon {
-  font-size: 40px!important;
+  font-size: 30px!important;
 }
 .el-icon-star-on {
-  color: #6084a0!important;
+  color: #fa7d3c!important;
 }
