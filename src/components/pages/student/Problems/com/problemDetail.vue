@@ -9,7 +9,6 @@
     <div class="problem-detail-content tch" v-else>
       <div class="content-title">
         <h3 class="problem-title">
-          <router-link class="el-icon-arrow-left" :to="{name: 'AddContest'}"></router-link>
           题目信息
         </h3>
       </div>
@@ -65,6 +64,7 @@
           line-height 45px
           padding 0px 8px
           color #888
+          cursor pointer
           &:not(:first-child)
             margin-left 20px
           &:hover

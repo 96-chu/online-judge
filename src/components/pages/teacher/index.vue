@@ -13,7 +13,7 @@
     </div>
     <div class="contest-manage">
       <p>
-        竞赛管理
+        比赛管理
         <a @click="isContestShow = !isContestShow">
           <span v-show="isContestShow"><i class="el-icon-arrow-down"></i>收起</span>
           <span v-show="!isContestShow"><i class="el-icon-arrow-up"></i>展开</span>

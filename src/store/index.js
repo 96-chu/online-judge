@@ -18,7 +18,6 @@ const store = new Vuex.Store({
   },
   mutations: {
     refreshUserInfo () {
-      console.log('进来了')
       store.state.roles = sessionStorage.getItem('roles')
       store.state.username = sessionStorage.getItem('username')
     }

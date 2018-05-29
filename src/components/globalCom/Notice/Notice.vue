@@ -5,7 +5,7 @@
       <span>公告</span>
     </div>
     <div class="notice-list">
-      <div class="notice-item" v-for="item in noticeData">
+      <div class="notice-item" v-for="item in noticeData" @click="$router.push({name: 'NoticeDetail'})">
         <span class="number">{{item.id}}.</span>
         {{item.title}}
       </div>

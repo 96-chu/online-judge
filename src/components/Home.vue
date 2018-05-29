@@ -15,7 +15,6 @@
       loginItem
     },
     created () {
-      console.log(this.$store.state.username)
     }
   }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="contest-detail-wrapper">
     <h3 class="contest-detail-title">
-      <router-link class="el-icon-arrow-left" :to="{name: 'TchIndex'}"></router-link>
+      <a class="el-icon-arrow-left" @click="backToPrevious"></a>
       ACM春季选拔赛
     </h3>
     <div class="contest-content-wrapper">
@@ -30,7 +30,13 @@
   export default {
     data () {
       return {
-        studentInfo: []
+        studentInfo: [],
+        previousRouteName: ''
+      }
+    },
+    methods: {
+      backToPrevious () {
+        this.$router.go(-1)
       }
     }
   }

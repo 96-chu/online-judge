@@ -2,7 +2,7 @@
   <div class="add-contest-wrapper">
     <h3 class="contest-title">
       <router-link class="el-icon-arrow-left" :to="{name: 'TchIndex'}"></router-link>
-      添加竞赛
+      添加比赛
     </h3>
     <div class="add-contest-content">
       <div class="cube" @click="$router.push({name: 'ContestAuto'})">
@@ -17,7 +17,9 @@
 </template>
 
 <script>
-  export default {}
+  export default {
+
+  }
 </script>
 
 <style scoped lang="stylus">

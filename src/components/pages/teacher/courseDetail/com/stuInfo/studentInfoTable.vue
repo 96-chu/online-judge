@@ -1,7 +1,7 @@
 <template>
   <div class="student-info-wrapper">
     <div class="tool-bar">
-      <el-button type="success" icon="el-icon-upload" circle size="small">导入表格数据</el-button>
+      <el-button type="success" icon="el-icon-upload" size="small">导入表格数据</el-button>
     </div>
     <el-table :data="studentInfo" class="student-info-table">
       <el-table-column type="index" label="编号">

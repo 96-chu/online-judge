@@ -31,25 +31,35 @@
               index: 0,
               title: '题库',
               isSelected: null,
+              name: 'problems',
               path: '/problems'
             },
             {
               index: 1,
               title: '比赛',
               isSelected: null,
+              name: 'contests',
               path: '/contests'
             },
             {
               index: 2,
               title: '作业',
               isSelected: null,
-              path: ''
+              path: '/homeworks',
+              name: 'homework'
             },
             {
               index: 3,
               title: '提交',
               isSelected: null,
-              path: ''
+              path: 'commit'
+            },
+            {
+              index: 4,
+              title: '帮助',
+              isSelected: null,
+              name: 'help',
+              path: '/help'
             }
           ]
         }
@@ -74,7 +84,7 @@
         },
         changeMenuStyle (path) {
           for (let index in this.menu) {
-            if (this.menu[index].path === path) {
+            if (path.indexOf(this.menu[index].name) > -1) {
               this.menu[index].isSelected = 'active'
             } else {
               this.menu[index].isSelected = null

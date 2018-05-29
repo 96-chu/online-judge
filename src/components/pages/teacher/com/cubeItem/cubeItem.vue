@@ -13,8 +13,10 @@
         <p v-show="type === 'contest'">结束时间：{{item.time_end}}</p>
       </div>
     </div>
-    <div class="cube-content cube-add" v-show="type === 'contest'" @click="$router.push({name: 'AddContest'})">
-      <i class="el-icon-circle-plus-outline"></i>
+    <div class="cube-content cube-add" v-show="type === 'contest'" @mouseenter="isExpand = true" @mouseleave="isExpand = false">
+      <i class="el-icon-more" v-show="!isExpand"></i>
+      <a class="el-icon-circle-plus-outline" v-show="isExpand" @click="$router.push({name: 'AddContest'})"></a>
+      <a class="el-icon-menu" v-show="isExpand" @click="$router.push({name: 'Contests'})"></a>
     </div>
   </div>
 </template>
@@ -24,7 +26,8 @@
     data () {
       return {
         cubeData: [],
-        type: null
+        type: null,
+        isExpand: false
       }
     },
     created () {
@@ -34,7 +37,7 @@
         if (this.type === 'course') {
           this.$router.push({name: 'stuInfo'})
         } else {
-          this.$router.push({name: 'TchContestDetail'})
+          this.$router.push({name: 'ContestDetail', params: {contestId: 1}})
         }
       }
     }
@@ -95,12 +98,14 @@
         color #535953
     .cube-add
       display flex
-      justify-content center
+      flex-direction row
+      justify-content space-around
       align-items center
       font-size 80px
       color #ccc
       transition all ease-in-out .3s
       background url("~assets/teacher/cubeBg/bg.png")
+      cursor default
       &:hover
-        color #616138
+        color #4a667b
 </style>

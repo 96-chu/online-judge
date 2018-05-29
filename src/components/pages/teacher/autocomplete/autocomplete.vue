@@ -3,7 +3,7 @@
     <div class="contest-title-wrapper">
       <h3 class="contest-title">
         <router-link class="el-icon-arrow-left" :to="{name: 'AddContest'}"></router-link>
-        添加竞赛
+        添加比赛
       </h3>
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item :to="{ name: 'TchIndex' }">首页</el-breadcrumb-item>
@@ -13,7 +13,7 @@
     </div>
     <div class="contest-info-wrapper">
       <div class="contest-info-title">
-        <p class="contest-info-title">竞赛基本信息</p>
+        <p class="contest-info-title">比赛基本信息</p>
         <!--<el-button size="small" v-show="status === 'edit'">保存编辑</el-button>-->
         <!--<el-button size="small" @click="status = 'edit'" v-show="status === 'check'">打开编辑</el-button>-->
       </div>
@@ -35,74 +35,74 @@
             :show-all-levels="false"
             v-model="basicInfo[2].data"
           ></el-cascader>
-          <div class="attend-member" v-show="index === 3">
-            <el-select v-model="basicInfo[3].data" multiple placeholder="请选择">
-              <el-option
-                v-for="opt in optionPerson"
-                :key="opt.value"
-                :label="opt.label"
-                :value="opt.value">
-              </el-option>
-            </el-select>
-            <el-button>管理分组</el-button>
-          </div>
+          <!--<div class="attend-member" v-show="index === 3">-->
+            <!--<el-select v-model="basicInfo[3].data" multiple placeholder="请选择">-->
+              <!--<el-option-->
+                <!--v-for="opt in optionPerson"-->
+                <!--:key="opt.value"-->
+                <!--:label="opt.label"-->
+                <!--:value="opt.value">-->
+              <!--</el-option>-->
+            <!--</el-select>-->
+            <!--<el-button>管理分组</el-button>-->
+          <!--</div>-->
         </div>
       </form>
       <div class="contest-info-title">
         <p class="contest-info-title">已选题目列表</p>
       </div>
       <el-table
-        :data="tableData5"
+        :data="tableData4"
         border
         class="autocomplete-table"
       >
+        <!--<el-table-column-->
+          <!--type="selection"-->
+          <!--width="55">-->
+        <!--</el-table-column>-->
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
-              <el-form-item label="商品名称">
+              <el-form-item label="题目编号">
+                <span>{{ props.row.index }}</span>
+              </el-form-item>
+              <el-form-item label="题目标题">
                 <span>{{ props.row.name }}</span>
               </el-form-item>
-              <el-form-item label="所属店铺">
-                <span>{{ props.row.shop }}</span>
+              <el-form-item label="题目描述">
+                <span>{{ props.row.description }}</span>
               </el-form-item>
-              <el-form-item label="商品 ID">
-                <span>{{ props.row.id }}</span>
+              <el-form-item label="题目难度">
+                <span>{{ props.row.hard }}</span>
               </el-form-item>
-              <el-form-item label="店铺 ID">
-                <span>{{ props.row.shopId }}</span>
-              </el-form-item>
-              <el-form-item label="商品分类">
-                <span>{{ props.row.category }}</span>
-              </el-form-item>
-              <el-form-item label="店铺地址">
-                <span>{{ props.row.address }}</span>
-              </el-form-item>
-              <el-form-item label="商品描述">
-                <span>{{ props.row.desc }}</span>
+              <el-form-item label="题目知识点">
+                <span>{{ props.row.tag }}</span>
               </el-form-item>
             </el-form>
           </template>
         </el-table-column>
         <el-table-column
-          label="题目描述"
-          prop="id">
-          <template slot-scope="scope">
-            <a @click="$router.push({name: 'ProblemDetail', params: {problemId: 1}})">{{scope.row.id}}</a>
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="题目使用次数"
+          label="题目标题"
           prop="name">
         </el-table-column>
         <el-table-column
-          label="题目最近使用时间"
-          prop="desc">
+          label="题目描述"
+          prop="description">
         </el-table-column>
         <el-table-column
-          label="通过率"
-          prop="desc">
+          label="题目使用次数"
+          prop="total_use">
         </el-table-column>
-        <el-table-column width="80px">
+        <el-table-column
+          label="题目最近使用时间"
+          prop="date">
+        </el-table-column>
+        <el-table-column label="通过率">
+          <template slot-scope="scope">
+            <span>{{ Math.ceil(scope.row.access/scope.row.total*100) }}%</span>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
               size="mini"
@@ -112,7 +112,7 @@
         </el-table-column>
       </el-table>
       <div class="contest-info-title">
-        <p class="contest-info-title">竞赛题目组建</p>
+        <p class="contest-info-title">比赛题目组建</p>
       </div>
       <div class="contest-problem-wrapper">
         <div class="row">
@@ -172,61 +172,62 @@
         :data="tableData5"
         border
         class="autocomplete-table"
+        @selection-change="handleSelectChange"
       >
         <el-table-column
           type="selection"
-          width="55">
+          width="55"
+        >
         </el-table-column>
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form label-position="left" inline class="demo-table-expand">
-              <el-form-item label="商品名称">
+              <el-form-item label="题目编号">
+                <span>{{ props.row.index }}</span>
+              </el-form-item>
+              <el-form-item label="题目标题">
                 <span>{{ props.row.name }}</span>
               </el-form-item>
-              <el-form-item label="所属店铺">
-                <span>{{ props.row.shop }}</span>
+              <el-form-item label="题目描述">
+                <span>{{ props.row.description }}</span>
               </el-form-item>
-              <el-form-item label="商品 ID">
-                <span>{{ props.row.id }}</span>
+              <el-form-item label="题目难度">
+                <span>{{ props.row.hard }}</span>
               </el-form-item>
-              <el-form-item label="店铺 ID">
-                <span>{{ props.row.shopId }}</span>
-              </el-form-item>
-              <el-form-item label="商品分类">
-                <span>{{ props.row.category }}</span>
-              </el-form-item>
-              <el-form-item label="店铺地址">
-                <span>{{ props.row.address }}</span>
-              </el-form-item>
-              <el-form-item label="商品描述">
-                <span>{{ props.row.desc }}</span>
+              <el-form-item label="题目知识点">
+                <span>{{ props.row.tag }}</span>
               </el-form-item>
             </el-form>
           </template>
         </el-table-column>
         <el-table-column
-          label="题目描述"
-          prop="id">
-        </el-table-column>
-        <el-table-column
-          label="题目使用次数"
+          label="题目标题"
           prop="name">
         </el-table-column>
         <el-table-column
-          label="题目最近使用时间"
-          prop="desc">
+          label="题目描述"
+          prop="description">
         </el-table-column>
         <el-table-column
-          label="通过率"
-          prop="desc">
+          label="题目使用次数"
+          prop="total_use">
+        </el-table-column>
+        <el-table-column
+          label="题目最近使用时间"
+          prop="date">
+        </el-table-column>
+        <el-table-column label="通过率">
+          <template slot-scope="scope">
+            <span>{{ Math.ceil(scope.row.access/scope.row.total*100) }}%</span>
+          </template>
         </el-table-column>
       </el-table>
       <div class="button-group">
+        <el-button type="success" plain v-show="addButtonShow" @click="addProblemToSelected">添加选中题目</el-button>
         <el-button type="success" plain>保存编辑</el-button>
         <el-button type="warning" plain>及时发布</el-button>
       </div>
     </div>
-    <!--加上最近使用时间的筛选，表格显示题目跳转编辑 输入，输出样例说明-->
   </div>
 </template>
 
@@ -237,20 +238,16 @@
         status: 'edit',
         basicInfo: [
           {
-            name: '竞赛标题',
+            name: '比赛标题',
             data: ''
           },
           {
-            name: '竞赛时间',
+            name: '比赛时间',
             data: ''
           },
           {
             name: '参赛形式',
             data: []
-          },
-          {
-            name: '参赛人员',
-            data: ''
           }
         ],
         optionalInfo: [  // 可选填条件
@@ -326,42 +323,108 @@
             label: 'group2（ben,peter,kitty）'
           }
         ],
-        tableData5: [{
-          id: '12987122',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }, {
-          id: '12987123',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }, {
-          id: '12987125',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }, {
-          id: '12987126',
-          name: '好滋好味鸡蛋仔',
-          category: '江浙小吃、小吃零食',
-          desc: '荷兰优质淡奶，奶香浓而不腻',
-          address: '上海市普陀区真北路',
-          shop: '王小虎夫妻店',
-          shopId: '10333'
-        }]
+        tableData4: [
+          // {
+          //   "index": 1,
+          //   "date": "2016-05-03",
+          //   "name": "A+B 问题",
+          //   "description": "Calculate a+b",
+          //   "tag": ["快速排序","二分法"],
+          //   "hard": "简单",
+          //   "total": 1749,
+          //   "access": 880,
+          //   "total_use": 5
+          // }
+        ],
+        tableData5: [
+          {
+            "index": 1,
+            "date": "2016-05-03",
+            "name": "A+B 问题",
+            "description": "Calculate a+b",
+            "tag": ["快速排序","二分法"],
+            "hard": "简单",
+            "total": 1749,
+            "access": 880,
+            "total_use": 5
+          },
+          {
+            "index": 3,
+            "date": "2016-05-03",
+            "name": "A+B 问题",
+            "description": "Calculate a+b",
+            "tag": "算法",
+            "hard": "简单",
+            "total": 1749,
+            "access": 880,
+            "total_use": 1
+          },
+          {
+            "index": 4,
+            "date": "2016-05-03",
+            "name": "A+B 问题",
+            "description": "Calculate a+b",
+            "tag": "算法",
+            "hard": "简单",
+            "total": 1749,
+            "access": 880,
+            "total_use": 5
+          },
+          {
+            "index": 7,
+            "date": "2016-05-03",
+            "name": "A+B 问题",
+            "description": "Calculate a+b",
+            "tag": "算法",
+            "hard": "简单",
+            "total": 1749,
+            "access": 880,
+            "total_use": 5
+          },
+          {
+            "index": 8,
+            "date": "2016-05-03",
+            "name": "A+B 问题",
+            "description": "Calculate a+b",
+            "tag": "算法",
+            "hard": "简单",
+            "total": 1749,
+            "access": 880,
+            "total_use": 5
+          },
+          {
+            "index": 9,
+            "date": "2016-05-03",
+            "name": "A+B 问题",
+            "description": "Calculate a+b",
+            "tag": "算法",
+            "hard": "简单",
+            "total": 1749,
+            "access": 880,
+            "total_use": 5
+          }
+        ],
+        addButtonShow: false,
+        selection: []
       }
     },
     methods: {
+      handleDelete  (index, row) {
+        this.tableData4.splice(index, 1)
+      },
+      handleSelectChange (selection) {
+        if (selection.length !== 0) {
+          this.addButtonShow = true
+          this.selection = selection
+        } else {
+          this.addButtonShow = false
+        }
+      },
+      addProblemToSelected () {
+        for (let item in this.selection) {
+          this.tableData4.push(this.selection[item])
+        }
+      },
       addNewTag () {
         console.log(this.tagNew)
         if (this.tagNew !== '') {

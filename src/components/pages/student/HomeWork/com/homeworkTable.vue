@@ -1,17 +1,18 @@
 <template>
-  <el-table :data="contestsData" class="contests-table" :cell-style="test">
-    <el-table-column type="index" label="编号">
+  <el-table :data="homeworkData" class="homework-table" :cell-style="test">
+    <!--<el-table-column type="index" label="编号">-->
+      <!--<template slot-scope="scope">-->
+        <!--<a @click="toDetail(scope.row.index)">{{scope.row.index}}</a>-->
+      <!--</template>-->
+    <!--</el-table-column>-->
+    <el-table-column type="index" label="作业课程">
       <template slot-scope="scope">
         <a @click="toDetail(scope.row.index)">{{scope.row.index}}</a>
       </template>
     </el-table-column>
-    <el-table-column label="比赛名称">
-      <template slot-scope="scope">
-        <a @click="toDetail(scope.row.index)">{{scope.row.name}}</a>
-      </template>
-    </el-table-column>
     <el-table-column prop="date" label="开始时间"></el-table-column>
-    <el-table-column prop="tag" label="比赛类型"></el-table-column>
+    <el-table-column prop="date" label="结束时间"></el-table-column>
+    <el-table-column prop="tag" label="作业章节"></el-table-column>
     <el-table-column label="状态">
       <template slot-scope="scope">
         <span v-if="scope.row.status === 'finished'">已经结束</span>
@@ -19,6 +20,7 @@
         <span v-else class="other">暂停</span>
       </template>
     </el-table-column>
+    <el-table-column prop="tag" label="课程教师"></el-table-column>
   </el-table>
 </template>
 
@@ -26,7 +28,7 @@
   export default {
     data () {
       return {
-        contestsData: []
+        homeworkData: []
       }
     },
     created () {
@@ -60,7 +62,7 @@
 </script>
 
 <style scoped lang="stylus">
-  .contests-table
+  .homework-table
     color #606266
     a:hover
       text-decoration underline

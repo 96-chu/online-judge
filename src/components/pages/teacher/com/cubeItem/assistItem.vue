@@ -1,23 +1,18 @@
 <template>
   <div class="assist-item-wrapper">
-    <div class="cube-content cube-add" @click="$router.push({name: 'AddProblem'})">
-      <a class="el-icon-circle-plus-outline">
-        <span>添加题目</span>
-      </a>
+    <div class="cube-content cube-add">
+      <router-link class="el-icon-circle-plus-outline" :to="{name: 'AddProblem'}">
+        添加题目
+      </router-link>
+    </div>
+    <div class="cube-content cube-add">
+      <router-link class="el-icon-circle-plus-outline" :to="{name: 'AddWork'}">
+        添加作业
+      </router-link>
     </div>
     <div class="cube-content cube-add">
       <a class="el-icon-circle-plus-outline">
-        <span>添加作业</span>
-      </a>
-    </div>
-    <div class="cube-content cube-add">
-      <a class="el-icon-circle-plus-outline">
-        <span>添加考试</span>
-      </a>
-    </div>
-    <div class="cube-content cube-add">
-      <a class="el-icon-circle-plus-outline">
-        <span>增加竞赛小组</span>
+        <span>管理比赛小组</span>
       </a>
     </div>
   </div>
@@ -54,13 +49,15 @@
       color #ccc
       transition all ease-in-out .3s
       &:hover
-        color #616138
+        a
+          color #4a667b
       a
         display flex
         align-items center
-        span
-          font-size 20px
-          margin-left 10px
-          color #535953
-          cursor pointer
+        font-size 20px
+        color #b3b3b3
+        transition all ease-in-out .3s
+        &:before
+          margin-right 10px
+
 </style>

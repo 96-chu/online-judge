@@ -33,6 +33,7 @@
       },
       methods: {
         toProblemDetail (id) {
+          // if () 
           this.$router.push({name: 'ProblemDetail', params: {problemId: id}})
         }
       }

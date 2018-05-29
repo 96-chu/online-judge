@@ -9,7 +9,7 @@ import Home from '@/components/Home'
 // import ProblemIndex from '@/components/pages/student/Problems/cubeItem/problemIndex.vue'
 // import Contests from '@/components/pages/student/Contests/contests.vue'
 // import ContestDetail from '@/components/pages/student/Contests/ContestDetail/contestDetail.vue'
-// import ContestIndex from '@/components/pages/student/Contests/ContestDetail/cubeItem/contestIndex.vue'
+// import ContestIndex from '@/components/pages/student/Contests/ContestDetail/cubeItem/contest-problem-list.vue'
 //  懒加载
 const Problem = (resolve) => {
   import('@/components/pages/student/Problems/problems.vue').then((module) => {
@@ -41,8 +41,28 @@ const ContestDetail = (resolve) => {
     resolve(module)
   })
 }
-const ContestIndex = (resolve) => {
-  import('@/components/pages/student/Contests/ContestDetail/com/contestIndex.vue').then((module) => {
+const ContestProblemList = (resolve) => {
+  import('@/components/pages/student/Contests/ContestDetail/com/contest-problem-list.vue').then((module) => {
+    resolve(module)
+  })
+}
+const SubmissionList = (resolve) => {
+  import('@/components/pages/student/Contests/ContestDetail/com/submission-list.vue').then((module) => {
+    resolve(module)
+  })
+}
+const Help = (resolve) => {
+  import('@/components/pages/student/Help/help.vue').then((module) => {
+    resolve(module)
+  })
+}
+const NoticeDetail = (resolve) => {
+  import('@/components/pages/student/NoticeDetail/noticeDetail.vue').then((module) => {
+    resolve(module)
+  })
+}
+const Homework = (resolve) => {
+  import('@/components/pages/student/Homework/homework.vue').then((module) => {
     resolve(module)
   })
 }
@@ -98,6 +118,12 @@ const ContestAuto = (resolve) => {
   })
 }
 
+const AddWork = (resolve) => {
+  import('@/components/pages/teacher/addWork/addWork.vue').then((module) => {
+    resolve(module)
+  })
+}
+
 
 Vue.use(Router)
 
@@ -121,7 +147,7 @@ export const constantRouterMap = [
   {
     path: '/problems',
     component: Problem,
-    name: 'Problem'
+    name: 'Problems'
   },
   {
     path: '/problems/:problemId',
@@ -150,14 +176,39 @@ export const constantRouterMap = [
     path: '/contests/:contestId',
     component: ContestDetail,
     name: 'ContestDetail',
-    redirect: '/contests/:contestId/index',
+    redirect: '/contests/:contestId/',
     children: [
       {
-        path: '/contests/:contestId/index',
-        component: ContestIndex,
-        name: 'ContestIndex'
+        path: '/',
+        component: ContestProblemList,
+        name: 'ContestProblemList'
+      },
+      {
+        path: 'submissions',
+        component: SubmissionList,
+        name: 'SubmissionList'
+      },
+      {
+        path: 'detail',
+        component: ProblemDetail,
+        name: 'Contest-Problem-Detail'
       }
     ]
+  },
+  {
+    path: '/homeworks',
+    component: Homework,
+    name: 'homework'
+  },
+  {
+    path: '/help',
+    component: Help,
+    name: 'Help'
+  },
+  {
+    path: '/noticeDetail',
+    component: NoticeDetail,
+    name: 'NoticeDetail'
   },
   {
     path: '/index',
@@ -205,6 +256,12 @@ export const constantRouterMap = [
     path: '/add-contest',
     component: AddContest,
     name: 'AddContest',
+    meta: { requiresAuth: true } //页面需要的权限
+  },
+  {
+    path: '/add-work',
+    component: AddWork,
+    name: 'AddWork',
     meta: { requiresAuth: true } //页面需要的权限
   },
   {
